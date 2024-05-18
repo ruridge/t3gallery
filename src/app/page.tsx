@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SignedOut, SignedIn } from "@clerk/nextjs";
 import { getMyImages } from "~/server/queries";
+import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
@@ -8,11 +9,11 @@ async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {images.map((images) => (
-        <div key={images.id} className="flex w-48 flex-col">
-          <img src={images.url} alt="" />
-          <div>{images.name}</div>
+    <div className="flex flex-wrap justify-center gap-4">
+      {images.map((image) => (
+        <div key={image.id} className="flex w-48 flex-col">
+          <Image src={image.url} alt={image.name} width={192} height={192} />
+          <div className="justify-self-end">{image.name}</div>
         </div>
       ))}
     </div>
