@@ -18,14 +18,35 @@ export function Modal({ children }: { children: React.ReactNode }) {
     router.back();
   }
 
+  function CloseSVG() {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="h-6 w-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>
+    );
+  }
+
   return createPortal(
     <dialog
       ref={dialogRef}
-      className="h-screen w-screen bg-black/90 text-white"
+      className="h-screen w-screen bg-black/70 text-white md:p-24"
       onClose={onDismiss}
     >
-      {children}
-      {/* <button onClick={onDismiss} className="close-button" /> */}
+      <div className="bg-background h-full">{children}</div>
+      <button onClick={onDismiss} className="absolute right-4 top-4">
+        <CloseSVG />
+      </button>
     </dialog>,
     document.getElementById("modal-root")!,
   );
