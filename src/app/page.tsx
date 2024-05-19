@@ -9,23 +9,30 @@ async function Images() {
   const images = await getMyImages();
 
   return (
-    <div className="grid auto-rows-max grid-cols-3 gap-px">
-      {images.map((image) => (
-        <Link
-          key={image.id}
-          href={`/img/${image.id}`}
-          className="relative aspect-square "
-        >
-          <Image
-            src={image.url}
-            alt={image.name}
-            fill
-            sizes="33vw"
-            style={{ objectFit: "cover" }}
-          />
-        </Link>
-      ))}
-    </div>
+    <>
+      {images.length === 0 && (
+        <div className="h-full w-full text-center text-2xl">
+          Upload your first image ^
+        </div>
+      )}
+      <div className="grid auto-rows-max grid-cols-3 gap-px">
+        {images.map((image) => (
+          <Link
+            key={image.id}
+            href={`/img/${image.id}`}
+            className="relative aspect-square "
+          >
+            <Image
+              src={image.url}
+              alt={image.name}
+              fill
+              sizes="33vw"
+              style={{ objectFit: "cover" }}
+            />
+          </Link>
+        ))}
+      </div>
+    </>
   );
 }
 
